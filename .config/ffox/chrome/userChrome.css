@@ -1,0 +1,218 @@
+/* Dark background during loading pages */
+@-moz-document url(chrome://browser/content/browser.xhtml) {
+  #main-window,
+  browser[type="content-primary"],
+  browser[type="content"],
+  tabbrowser#content,
+  #content,
+  browser[type="content"] > html
+  {
+     background: #111111 !important;
+  }
+}
+
+/* Remove the forward and back buttons */
+#back-button, #forward-button  { display: none !important; }
+
+/* Remove containers name and symbol */
+#userContext-label, #userContext-indicator { display: none !important;}
+
+/* Auto-hide bookmarks bar (show only on nav-bar hover)  */
+#PersonalToolbar{
+    opacity:0 !important;
+    margin-top: -23px !important;
+    transition: all 0.1s ease 0s !important;
+}
+
+#navigator-toolbox:hover > #PersonalToolbar{
+visibility: visible !important;
+margin-top: 0px !important;
+transition: all 0.1s ease 0s !important;
+opacity: 1 !important;
+}
+
+/* Hides the buttons on findbar */
+.findbar-highlight {
+  visibility: collapse !important;
+}
+
+.findbar-case-sensitive {
+  visibility: collapse !important;
+}
+
+.findbar-find-status {
+  visibility: collapse !important;
+}
+
+.findbar-entire-word {
+  visibility: collapse !important;
+}
+
+/* Hides the zoom indicator */
+#urlbar-zoom-button { 
+  display: none !important; 
+}
+
+/* Hides vertical separator line to make it look cleaner */
+#pageActionSeparator { 
+  display: none !important;
+}
+
+/* Makes urlbar and many other things sharper on the edges */
+:root {
+  --toolbarbutton-border-radius: 0px !important;
+}
+
+/* Don't show close button */
+.tab-close-button {
+  display: none !important;
+}
+
+/* Hide favicon on unpinned tabs */
+.tabbrowser-tab:not([busy="true"]):not([pinned]) .tab-icon-image
+{
+  display: none !important;
+}
+
+/* Style your tabs similar to Googles "Material Design" guidelines */
+.tabbrowser-tab[visuallyselected="true"] {
+  color: inherit !important; /* Use background tab text color for foreground tabs */
+}
+
+.tab-background[selected=true] {
+  background-color: transparent !important; /* Make selected tab bg transparent */
+}
+
+.tab-line {
+  -moz-box-ordinal-group: 2; /* Move the line to the bottom */
+}
+
+.tab-line[selected=true] {
+  background-color: grey !important; /* Make the line white, remove this for default color */
+}
+
+/* Makes tabs only 22px high rather than the default 29px */
+[uidensity="compact"]:root {
+  --tab-min-height: 22px !important;
+  --newtab-margin: -3px 0 -3px -3px !important;
+}
+
+:root[uidensity="compact"] #tabbrowser-tabs {
+  --tab-min-height: var(--tab-min-height) !important;
+}
+
+.tabbrowser-tab {
+  max-height: var(--tab-min-height) !important;
+}
+
+.tabs-newtab-button{
+  margin: var(--newtab-margin) !important;
+}
+
+/* Tab line matches container color, show on hover on background tabs */
+.tabbrowser-tab[usercontextid] .tab-line{
+  background-color:var(--identity-tab-color)!important;
+}
+
+.tabbrowser.tab[usercontextid] .tab-line {
+  background:var(--identity-tab-color) !important;
+}
+
+.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-bottom-line {
+  background: none !important;
+}
+
+/* Underlines and dims unloaded tabs */
+.tabbrowser-tab[pending] {
+  text-decoration: underline;
+  opacity: .5;
+}
+
+/* Make the toolbar extra-compact */
+:root[uidensity=compact] #urlbar,
+:root[uidensity=compact] .searchbar-textbox {
+  font-size: unset !important;
+  min-height: 24px !important;
+}
+
+:root[uidensity=compact] #identity-box {
+  max-height: 22px;
+}
+
+:root[uidensity=compact] #nav-bar .toolbarbutton-1 {
+  padding: 0px !important;
+}
+
+/* Compatibility with auto-hide.css */
+:root[uidensity=compact] #navigator-toolbox {
+  --nav-bar-height: 31px !important;
+}
+
+/* Minimizes bookmarks to their Favicon or hides the folder icon */
+.bookmark-item > .toolbarbutton-text  {
+  width: 0;
+}
+:root[uidensity="compact"] toolbarbutton.bookmark-item:not(.subviewbutton) {
+	margin: 0px;
+	padding: 2px 1px;
+}
+
+/* Show folder names instead of icon */
+toolbarbutton.bookmark-item[type="menu"] .toolbarbutton-text {
+	width: auto;
+}
+
+/* Show the folder icon only if the label is blank */
+toolbarbutton.bookmark-item[type="menu"] .toolbarbutton-icon[label]:not([label=""]) {
+	width: 0px !important;
+}
+
+/* Hide the little bit of padding between the icon and label */
+#PlacesToolbarItems > .bookmark-item > .toolbarbutton-icon[label]:not([label=""]) {
+  margin-inline-end: 0px !important;
+}
+
+/* Makes the favicon grayscale to fit better in flat design */
+tab .tab-icon, .tab-icon-image {
+  filter: grayscale(0.7) brightness(0.9) contrast(1.2);
+}
+
+/* don't show the blue border around the url bar when focused */
+#urlbar, .searchbar-textbox {
+  font-size: 12pt !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* hide the one pixel top border for tabs */
+.tab-background {
+       border-top: none !important;
+}
+
+/* Reduce the "white flash" in new tabs */
+browser[type="content-primary"], 
+browser[type="content"] {
+  background: #111111 !important;
+}
+
+/* Remove white flash on newtab ang page loading */
+#browser vbox#appcontent tabbrowser, #content, #tabbrowser-tabpanels, browser[type=content-primary], browser[type=content] > html {
+	background: #111111 !important; 
+	background-color: #111111 !important; 
+	color: #111111 !important;
+}
+
+/* Hidden newtab button */
+#new-tab-button {
+  visibility: collapse !important;
+  display: unset !important;
+}
+
+:-moz-any(.tabs-newtab-button,#tabs-newtab-button) {
+  visibility: collapse !important;
+}
+
+/* Makes the bookmarks grayscale to fit better in flat design */
+#PersonalToolbar {
+  filter: grayscale(0.7) brightness(0.9) contrast(1.2);
+}

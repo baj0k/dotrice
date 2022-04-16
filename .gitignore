@@ -1,0 +1,72 @@
+# Ignore all except for
+/*
+
+# $HOME
+!.gitignore
+!setup.sh
+!README
+
+# ~/.local
+!.local/
+.local/*
+!.local/bin/
+
+!.local/share/
+.local/share/*
+!.local/share/applications/
+
+# ~/.config
+!.config/
+.config/*
+
+!.config/dunst/
+!.config/ffox/
+!.config/i3/
+!.config/locale.conf
+!.config/mpv/
+!.config/neofetch/
+!.config/newsboat/
+!.config/ranger/
+!.config/tmux/
+!.config/user-dirs.dirs
+!.config/xorg/
+!.config/yay/
+!.config/zathura/
+
+# git
+!.config/git/
+.config/git/config
+
+# mpd
+!.config/mpd/
+.config/mpd/*
+!.config/mpd/mpd.conf
+
+# ncmpcpp
+!.config/ncmpcpp/
+.config/ncmpcpp/*
+!.config/ncmpcpp/config
+!.config/ncmpcpp/bindings
+
+# neomutt
+!.config/mutt/
+.config/mutt/*
+!.config/mutt/bindings.muttrc
+!.config/mutt/muttrc
+
+# neovim
+!.config/nvim/
+.config/nvim/*
+!.config/nvim/init.vim
+!.config/nvim/netrw.vim
+!.config/nvim/tabline.vim
+!.config/nvim/vimplug.vim
+
+# zsh
+!.config/zsh/
+.config/zsh/*
+!.config/zsh/aliasrc
+!.config/zsh/.zkbd
+!.config/zsh/.zprofile
+!.config/zsh/.zshenv
+!.config/zsh/.zshrc
