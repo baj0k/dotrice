@@ -24,7 +24,7 @@ In order to use firefox configuration files the ~/.config/ffox/chrome directory 
 # Installation
 Following command installs the dotfiles into your workspace. Do not run this carelessly.
 ```
-curl -L https://raw.githubusercontent.com/baj0k/dotfiles/main/setup.sh | sh
+curl -L https://raw.githubusercontent.com/baj0k/dotfiles/desktop/setup.sh | sh
 ```
 Or execute following commands manually if changes are needed.
 ```
