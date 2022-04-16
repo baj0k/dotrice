@@ -4,7 +4,8 @@
 # $HOME
 !.gitignore
 !setup.sh
-!README
+!README.md
+!LICENSE
 
 # ~/.local
 !.local/
