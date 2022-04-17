@@ -3,8 +3,8 @@
 
 # History settings
 HISTFILE="${XDG_DATA_HOME}/zsh/history"
-HISTSIZE=2000
-SAVEHIST=2000
+HISTSIZE=5000
+SAVEHIST=5000
 
 # Include
 [ -f "${ZDOTDIR}/aliasrc" ] && source "${ZDOTDIR}/aliasrc"

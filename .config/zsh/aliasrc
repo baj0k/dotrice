@@ -1,74 +1,71 @@
 #!/bin/sh
 # System maintenance
-alias kop='sudo $(fc -ln -1)'
-alias off='sudo poweroff'
-alias reboot='sudo reboot'
-alias mdot='git --git-dir=$HOME/.local/dotfiles/ --work-tree=$HOME/'
-alias mdotclean='git --git-dir=$HOME/.local/dotfiles/ --work-tree=$HOME/ update-index --assume-unchanged "README.md" ".gitignore" "LICENSE" "setup.sh"'
-alias ssys='sudo systemctl'
-alias p='ping 1.1.1.1'
+alias kop='/usr/bin/sudo $(fc -ln -1)'
+alias off='/usr/bin/sudo /usr/bin/shutdown -h now'
+alias reboot='/usr/bin/sudo /usr/bin/shutdown -r now'
+alias mdot='/usr/bin/git --git-dir=$HOME/.local/dotfiles/ --work-tree=$HOME/'
+alias mdotclean='/usr/bin/git --git-dir=$HOME/.local/dotfiles/ --work-tree=$HOME/ update-index --assume-unchanged "README.md" ".gitignore" "LICENSE" "setup.sh"'
+alias ssys='/usr/bin/sudo /usr/bin/systemctl'
+alias p='/usr/bin/ping 1.1.1.1'
 alias cd..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../../'
-alias rmf='rm -rfv'
-alias du='sudo du -sh ./* | sort -rh'
-alias paux='ps -auxwf | grep'
-alias psg='ps -ef | grep -i $1'
-alias nsg='netstat -natp | grep -i $1'
+alias rmf='/usr/bin/rm -rfv'
+alias du='/usr/bin/sudo /usr/bin/du -sh ./* | /usr/bin/sort -rh'
+alias paux='/usr/bin/ps -auxwf | /usr/bin/grep --color=auto'
+alias psg='/usr/bin/ps -ef | /usr/bin/grep --color=auto -i $1'
+alias nsg='/usr/bin/netstat -natp | /usr/bin/grep --color=auto -i $1'
 
 # Package maintenance
-alias syu='yay -Syu'
-alias sp='sudo pacman'
+alias syu='/usr/bin/yay -Syu'
+alias sp='/usr/bin/sudo /usr/bin/pacman'
 
 # Default parameters 
-alias c='clear'
-alias cp='cp -iv'
-alias diff='diff --color'
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias ip='ip -c'
-alias ls='ls -lhNF --color=auto --group-directories-first'
-alias mkdir='mkdir -pv'
-alias msfconsole='msfconsole -q'
-alias mv='mv -iv'
-alias rm='rm -iv'
-alias urlscan='urlscan -csH'
-
-# Program shortcuts
-alias cat='bat -pp'
-alias ga='git add'
-alias gc='git commit -m'
-alias gp='git push'
-alias gs='git status'
-alias l='ls' 
-alias ll='ls -a'
-alias n='ncmpcpp 2>/dev/null'
-alias news='newsboat -q'
-alias o='rifle'
-alias r='ranger'
-alias v='$EDITOR'
-alias sv='sudoedit'
-alias vp='$EDITOR $_'
-alias svp='sudoedit $_'
-alias catp='bat -pp $_'
-alias scatp='sudo bat -pp $_'
-alias pwgen='pass generate --clip'
-alias stream='ffmpeg -f x11grab -video_size 2560x1440 -framerate 30 -i $DISPLAY -f alsa -i default -c:v libx264 -preset ultrafast -c:a aac screen.mp4'
-alias z='setsid nohup zathura > /tmp/zathuranohup.out 2>&1'
-alias hugoserv='hugo server -D --minify --disableFastRender'
-
-# XDG_CONFIG workarounds
-alias wget='wget --hsts-file="${XDG_CACHE_HOME}/wget-hsts"'
-alias tmux='tmux -f "$XDG_CONFIG_HOME/tmux/tmux.conf"'
-alias mbsync='mbsync -c "$XDG_CONFIG_HOME/isync/mbsyncrc"'
-alias tor-browser='setsid nohup tor-browser-en --dir=$XDG_CONFIG_HOME/tor > /tmp/tor-browsernohup.out 2>&1'
-alias weechat='weechat -d "$XDG_CONFIG_HOME/weechat"'
+alias c='/usr/bin/clear'
+alias cp='/usr/bin/cp -iv'
+alias diff='/usr/bin/diff --color'
+alias grep='/usr/bin/grep --color=auto'
+alias egrep='/usr/bin/egrep --color=auto'
+alias fgrep='/usr/bin/fgrep --color=auto'
+alias ip='/usr/bin/ip -c'
+alias ls='/usr/bin/ls -lhNF --color=auto --group-directories-first'
+alias mkdir='/usr/bin/mkdir -pv'
+alias msfconsole='/usr/bin/msfconsole -q'
+alias mv='/usr/bin/mv -iv'
+alias rm='/usr/bin/rm -iv'
+alias urlscan='/usr/bin/urlscan -csH'
 
 # Automatic file listing after changing directory
-cdls () { builtin cd "$@" && l; }
+cdls () { builtin cd "$@" && /usr/bin/ls -lhNF --color=auto --group-directories-first; }
+
+# Program shortcuts
 alias cd='cdls'
 alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../../'
+alias cat='/usr/bin/bat -pp'
+alias ga='/usr/bin/git add'
+alias gc='/usr/bin/git commit -m'
+alias gp='/usr/bin/git push'
+alias gs='/usr/bin/git status'
+alias l='/usr/bin/ls -lhNF --color=auto --group-directories-first' 
+alias ll='/usr/bin/ls -alhNF --color=auto --group-directories-first'
+alias n='/usr/bin/ncmpcpp 2>/dev/null'
+alias news='/usr/bin/newsboat -q'
+alias o='/usr/bin/rifle'
+alias r='/usr/bin/ranger'
+alias v='$EDITOR'
+alias sv='/usr/bin/sudoedit'
+alias vp='$EDITOR $_'
+alias svp='/usr/bin/sudoedit $_'
+alias catp='/usr/bin/bat -pp $_'
+alias scatp='/usr/bin/sudo /usr/bin/bat -pp $_'
+alias pwgen='/usr/bin/pass generate --clip'
+alias stream='/usr/bin/ffmpeg -f x11grab -video_size 2560x1440 -framerate 30 -i $DISPLAY -f alsa -i default -c:v libx264 -preset ultrafast -c:a aac screen.mp4'
+alias hugoserv='/usr/bin/hugo server -D --minify --disableFastRender'
+
+# XDG_CONFIG workarounds
+alias wget='/usr/bin/wget --hsts-file="${XDG_CACHE_HOME}/wget-hsts"'
+alias tmux='/usr/bin/tmux -f "$XDG_CONFIG_HOME/tmux/tmux.conf"'
+alias weechat='/usr/bin/weechat -d "$XDG_CONFIG_HOME/weechat"'
 
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \
@@ -77,7 +74,7 @@ man() {
     LESS_TERMCAP_so=$'\e[01;44;33m' \
     LESS_TERMCAP_ue=$'\e[0m' \
     LESS_TERMCAP_us=$'\e[01;32m' \
-    command man "$@"
+    command /usr/bin/man "$@"
 }
 
 # Printer
