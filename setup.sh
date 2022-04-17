@@ -21,6 +21,7 @@ echo "POST-MERGE"
 [ -e "$HOME/.gitignore" ] && /usr/bin/mv ~/.gitignore ~/.local/dotfiles/info/exclude && echo "Updated .gitignore"
 [ -e "$HOME/README.md" ] && /usr/bin/rm ~/README.md && echo "Removed README.md"
 [ -e "$HOME/setup.sh" ] && /usr/bin/rm ~/setup.sh && echo "Removed setup.sh"
+/usr/bin/git --git-dir="$HOME/.local/dotfiles/" --work-tree="$HOME/" update-index --assume-unchanged "README.md" ".gitignore" "LICENSE" "setup.sh"
 EOF
 
 /usr/bin/chmod +x ~/.local/dotfiles/hooks/post-merge
