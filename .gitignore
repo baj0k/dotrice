@@ -1,12 +1,6 @@
 # Ignore all except for
 /*
 
-# $HOME
-!.gitignore
-!setup.sh
-!README.md
-!LICENSE
-
 # ~/.local
 !.local/
 .local/*
