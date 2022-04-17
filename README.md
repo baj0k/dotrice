@@ -51,6 +51,7 @@ chmod +x ~/.local/dotfiles/hooks/post-merge
 Below commands might be useful for managing dotfiles using this approach. 
 ```
 alias mdot='git --git-dir=$HOME/.local/dotfiles/ --work-tree=$HOME/'
+alias mdotclean='git --git-dir=$HOME/.local/dotfiles/ --work-tree=$HOME/ update-index --assume-unchanged "README.md" ".gitignore" "LICENSE" "setup.sh"'
 mdot config status.showUntrackedFiles no
 mdot remote set-url origin git@github.com:baj0k/dotfiles.git
 ```
