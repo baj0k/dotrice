@@ -12,10 +12,6 @@
 .local/*
 !.local/bin/
 
-!.local/share/
-.local/share/*
-!.local/share/applications/
-
 # ~/.config
 !.config/
 .config/*
@@ -49,12 +45,6 @@
 !.config/ncmpcpp/config
 !.config/ncmpcpp/bindings
 
-# neomutt
-!.config/mutt/
-.config/mutt/*
-!.config/mutt/bindings.muttrc
-!.config/mutt/muttrc
-
 # neovim
 !.config/nvim/
 .config/nvim/*
@@ -62,6 +52,10 @@
 !.config/nvim/netrw.vim
 !.config/nvim/tabline.vim
 !.config/nvim/vimplug.vim
+
+!.config/nvim/spell
+.config/nvim/spell/*
+!.config/nvim/spell/en.utf-8.add
 
 # zsh
 !.config/zsh/
