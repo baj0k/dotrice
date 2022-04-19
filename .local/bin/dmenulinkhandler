@@ -1,4 +1,5 @@
 #!/bin/sh
+# TODO: cleanup
 
 case "$(printf "copy url\\nmpv\\nmpv (loop)\\nqueue download\\nqueue youtube-dl\\nfeh\\nbrowser\\nw3m\\nmpv (float)" | dmenu -i -p "Open link with what program?")" in
 	"copy url") echo "$1" | xclip -selection clipboard ;;

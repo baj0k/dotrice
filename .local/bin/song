@@ -1,4 +1,5 @@
 #!/bin/bash
+# TODO: cleanup
 
 all_name='[ALL]'
 mode=library
@@ -48,6 +49,7 @@ for arg do
     case "$arg" in
         -l) mode=library ;;
         -p) mode=playlist ;;
+        *) exit 0 ;;
     esac
 
     let i++
@@ -73,4 +75,5 @@ case "$mode" in
     playlist)
         mpc play "$(d_playlist)" >/dev/null
     ;;
+    *) exit 0 ;;
 esac

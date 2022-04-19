@@ -1,3 +1,7 @@
 #!/bin/sh
-password=$(find "${PASSWORD_STORE_DIR:?}" -type f -name '*.gpg' | sed 's/.*\/password-store\///' |  sed 's/.gpg$//' | dmenu -i -p "Add to:")
-[ -n "${password}" ] && scrot -s "/tmp/screenshot-$(date +%F_%T).png" -e "zbarimg -q --raw ${f}" | pass otp append "${password}"
+
+TMPFILE=$(/usr/bin/mktemp -d) && trap '/usr/bin/rm -rf "$TMPFILE"' EXIT
+
+password=$(/usr/bin/find "${PASSWORD_STORE_DIR:?}" -name '*.gpg' -exec /usr/bin/basename {} .gpg \; | /usr/local/bin/dmenu -i -p "Add OTP to:") || exit 0
+/usr/bin/scrot -s "${TMPFILE}/tmp.png" &&
+/usr/bin/zbarimg -q --raw "${TMPFILE}/tmp.png" | /usr/bin/pass otp append "${password}"

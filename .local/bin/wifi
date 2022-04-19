@@ -1,4 +1,5 @@
 #!/bin/bash
+# TODO: cleanup
 
 ssid=$(wpa_cli -i wlan0 scan > /dev/null 2>&1 && sleep 3 && wpa_cli -i wlan0 scan_results | cut -f 5 | tail -n +2 | sort -u | dmenu -i -p "Select connection:")
 

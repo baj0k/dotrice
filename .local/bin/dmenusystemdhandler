@@ -1,4 +1,5 @@
 #!/bin/sh
+# TODO: cleanup
 
 service=$(systemctl list-unit-files -t service --no-legend --no-pager | cut -d' ' -f1 | dmenu -l 10 -p Service)
 [ -n "${service}" ] && action=$(printf "status\\nstart\\nstop\\nrestart\\nenable\\ndisable" | dmenu -l 6 -p "Action")

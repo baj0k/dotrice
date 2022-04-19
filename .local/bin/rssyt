@@ -1,10 +1,15 @@
 #!/bin/sh
-urlfile="${XDG_CONFIG_HOME:?}/newsboat/urls"
 
-# the script needs the channel url in the clipboard
-url=$(curl -s "$(xclip -o)" | grep -o 'rssUrl\":\"[^"]*' | cut -d \" -f 3)
-[ -n "${url}" ] && tag=$(printf "feed\nvideo\naudio\nreddit" | dmenu -i -p "Tag:") || notify-send "No rss url found" && exit 0
-title=$(echo '' | dmenu -i -p "Name: ~${tag}: ")
+TMPFILE=$(/usr/bin/mktemp) && trap '/usr/bin/rm -rf "$TMPFILE"' EXIT
+URLFILE="${XDG_CONFIG_HOME:=${HOME}/.config}/newsboat/urls"
 
-echo "${url}" \""${tag}"\" \"\~"${tag}": "${title}"\" >> "${urlfile}"
-sort -f -k 3 -k 2 < "${urlfile}" > "${urlfile}".tmp && mv "${urlfile}".tmp "${urlfile}"
+# Get rss link from YouTube's channel page source
+url=$(/usr/bin/curl -s "$(/usr/bin/xclip -o || true)" | /usr/bin/grep -o 'rssUrl\":\"[^"]*' | /usr/bin/cut -d \" -f 3)
+
+[ -z "${url}" ] && /usr/bin/notify-send "No rss url found" && exit 0
+tag=$(printf "feed\nvideo\naudio" | /usr/local/bin/dmenu -i -p "Tag:")
+title=$(/usr/local/bin/dmenu -i -p "Name: ~${tag}: " <&-)
+
+echo "${url}" \""${tag}"\" \"\~"${tag}": "${title}"\" >> "${URLFILE}"
+/usr/bin/sort -f -k 3 -k 2 < "${URLFILE}" > "${TMPFILE}"
+/usr/bin/mv "${TMPFILE}" "${URLFILE}"
