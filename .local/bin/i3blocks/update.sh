@@ -1,4 +1,5 @@
 #!/bin/sh
+# TODO: change behaviour so that the i3bar hides icon after updates were installed
 
 status=$(/usr/bin/checkupdates)
 count=$(printf '%s' "${status}" | /usr/bin/wc -l)

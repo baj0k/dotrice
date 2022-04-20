@@ -1,4 +1,0 @@
-#!/bin/sh
-
-vpn=$(/usr/bin/find "${XDG_DATA_HOME:?}/openvpn" -name '*.ovpn' -exec /usr/bin/basename {} .ovpn \; | /usr/local/bin/dmenu -i -p "Select connection:") || exit 0
-openvpn --config "${XDG_DATA_HOME}/openvpn/${vpn}.ovpn" --daemon

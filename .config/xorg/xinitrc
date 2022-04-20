@@ -1,4 +1,5 @@
 #!/bin/sh
+# TODO: find a way to terminate autostart applications upon exit from dwm
 
 # Source Xresources
 xrdb -merge "$XDG_CONFIG_HOME/xorg/Xresources" &
@@ -28,4 +29,8 @@ xset s off -dpms &
 [ -f /usr/bin/blueman-applet ] && blueman-applet &
 
 # Start WM
-exec i3 
+#while /usr/bin/xsetroot -name "$(/usr/bin/date || true) $(/usr/bin/uptime | /usr/bin/sed 's/.*,//' || true)"
+#do
+#    sleep 1
+#done &
+exec dwm
