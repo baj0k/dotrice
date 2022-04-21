@@ -1,36 +1,37 @@
 #!/bin/sh
-# TODO: find a way to terminate autostart applications upon exit from dwm
+# TODO: find a way to terminate autostart applications upon exit from dwm. Restarting dwm doesnt spawn a new instances of autostart applications
 
 # Source Xresources
-xrdb -merge "$XDG_CONFIG_HOME/xorg/Xresources" &
+[ -f /usr/bin/xrdb ] && /usr/bin/xrdb -merge "$XDG_CONFIG_HOME/xorg/Xresources" &
 
-# Increase key speed, enable compositor and set dpms parameters 
-/usr/bin/xset r rate 300 35 &
-xcompmgr &
-xset s off -dpms &
+# Increase key speed, set dpms parameters, enable compositor and set wallpaper
+[ -f /usr/bin/xset ] && /usr/bin/xset r rate 300 35 &
+[ -f /usr/bin/xset ] && /usr/bin/xset s off -dpms &
+[ -f /usr/bin/xcompmgr ] && /usr/bin/xcompmgr &
+[ -f /usr/bin/xwallpaper ] && /usr/bin/xwallpaper --zoom "${XDG_DATA_HOME}/wall" &
 
 # Autostart 
-[ -f /usr/bin/firefox ] && firefox &
+[ -f "${BROWSER}" ] && "${BROWSER}" &
 
 # Display configuration
-[ -f /usr/bin/autorandr ] && autorandr --default &
-[ -f /usr/bin/redshift ] && redshift -P -O 4200 &
+[ -f /usr/bin/autorandr ] && /usr/bin/autorandr --default &
+[ -f /usr/bin/redshift ] && /usr/bin/redshift -P -O 4200 &
 
 # Daemons
-[ -f /usr/bin/crond ] && crond -f "$XDG_CONFIG_HOME/crontab" &
-[ -f /usr/bin/dunst ] && dunst &
-[ -f /usr/bin/mpd ] && mpd &
-[ -f /usr/bin/spice-vdagent ] && spice-vdagent &
+[ -f /usr/bin/dunst ] && /usr/bin/dunst &
+[ -f /usr/bin/mpd ] && /usr/bin/mpd &
+[ -f /usr/bin/spice-vdagent ] && /usr/bin/spice-vdagent &
 
 # Tray
-[ -f /usr/bin/caprine ] && caprine --minimize &
-[ -f /usr/bin/discord ] && discord --start-minimized &
-[ -f /usr/bin/signal-desktop ] && signal-desktop --start-in-tray &
-[ -f /usr/bin/blueman-applet ] && blueman-applet &
+[ -f /usr/bin/blueman-applet ] && /usr/bin/blueman-applet &
+[ -f /usr/bin/caprine ] && /usr/bin/caprine --minimize &
+[ -f /usr/bin/discord ] && /usr/bin/discord --start-minimized &
+[ -f /usr/bin/signal-desktop ] && /usr/bin/signal-desktop --start-in-tray &
+[ -f /usr/bin/spotify ] && /usr/bin/spotify & # TODO: currently doesn't start in tray
 
 # Start WM
 #while /usr/bin/xsetroot -name "$(/usr/bin/date || true) $(/usr/bin/uptime | /usr/bin/sed 's/.*,//' || true)"
 #do
 #    sleep 1
 #done &
-exec dwm
+exec /usr/local/bin/dwm
