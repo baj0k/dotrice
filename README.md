@@ -16,7 +16,7 @@ This repository stores personalized configuration files for the following softwa
 - zathura
 - zsh
 
-Full integration requires patching and building some tools made by [Suckless](https://suckless.org) of which the most important are st, dmenu, slock and tabbed.
+Full integration requires patching and building some tools made by [Suckless](https://suckless.org) of which the most important are st, dmenu and dwm.
 Checkout my [suckless-builds](https://github.com/baj0k/suckless-builds) repository for the out-of-the-box solution.
 
 In order to use firefox configuration files the ~/.config/ffox/chrome directory needs to be manually copied into chrome directory in the firefox profile.
