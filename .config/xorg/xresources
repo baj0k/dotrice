@@ -1,5 +1,5 @@
 !st
-st.alpha: 0.83
+st.alpha: 0.9
 st.font: Liberation Mono-15:autohint=true;
 st.fontalt: DejaVu Sans Mono-14:antialias=true:autohint=true;
 st.background: #010101

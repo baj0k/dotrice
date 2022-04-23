@@ -13,12 +13,11 @@
 	syntax on
 
 " Whitespace options
-    set tabstop=4      
-    set softtabstop=4 
-    set shiftwidth=4 
-    set expandtab   
+    set tabstop=4
+    set softtabstop=4
+    set shiftwidth=4
     set autoindent
-    set copyindent 
+    set copyindent
 
 " Autocompletion
 	set wildmode=longest,list,full
@@ -73,5 +72,5 @@
     let g:vim_markdown_toml_frontmatter = 1  " for TOML format
     let g:vim_markdown_json_frontmatter = 1  " for JSON format
 
-" Run xrdb after .Xresources are updated
-    autocmd BufWritePost *Xresources !xrdb %
+" Run xrdb after xresources are updated
+    autocmd BufWritePost *xresources !xrdb %
