@@ -1,33 +1,30 @@
 #!/bin/sh
 
-# TODO: Remove this after fixing the network interfaces
-sudo ip link set eth0 master br0 &
-
 # Source xresources
-[ -x xrdb ] && xrdb -merge "${XDG_CONFIG_HOME:?}/xorg/xresources" &
+[ -x /usr/bin/xrdb ] && /usr/bin/xrdb -merge "${XDG_CONFIG_HOME:?}/xorg/xresources" &
 
 # Increase key speed, set dpms parameters and set wallpaper
-[ -x xset ] && xset r rate 300 50 &
-[ -x xset ] && xset s off -dpms &
-[ -x xwallpaper ] && xwallpaper --zoom "${XDG_CACHE_HOME:?}/wall" &
+[ -x /usr/bin/xset ] && /usr/bin/xset r rate 300 50 &
+[ -x /usr/bin/xset ] && /usr/bin/xset s off -dpms &
+[ -x /usr/bin/xwallpaper ] && /usr/bin/xwallpaper --zoom "${XDG_DATA_HOME:?}/wall" &
 
 # Display configuration
-[ -x autorandr ] && autorandr --default &
-[ -x redshift ] && redshift -P -O 4200 &
+[ -x /usr/bin/autorandr ] && /usr/bin/autorandr --default &
+[ -x /usr/bin/redshift ] && /usr/bin/redshift -P -O 4200 &
 
 # Tray
-#[ -f blueman-applet ] && blueman-applet &
-#[ -f caprine ] && caprine --minimize &
-#[ -f discord ] && discord --start-minimized &
-#[ -f signal-desktop ] && signal-desktop --start-in-tray &
-#[ -f spotify ] && spotify & # TODO: currently doesn't start in tray
+#[ -f /usr/bin/blueman-applet ] && /usr/bin/blueman-applet &
+#[ -f /usr/bin/caprine ] && /usr/bin/caprine --minimize &
+#[ -f /usr/bin/discord ] && /usr/bin/discord --start-minimized &
+#[ -f /usr/bin/signal-desktop ] && /usr/bin/signal-desktop --start-in-tray &
+#[ -f /usr/bin/spotify ] && /usr/bin/spotify & # TODO: currently doesn't start in tray
 
 # Autostart
 autostart="dunst firefox mpd spice-vdagent unclutter xcompmgr"
 for program in ${autostart}; do
-    pidof -s "${program}" || [ -x "${program}" ] && setsid -f "${program}"
+    /usr/bin/pidof -s "${program}" || [ -x "/usr/bin/${program}" ] && /usr/bin/setsid -f "/usr/bin/${program}"
 done >/dev/null 2>&1
 
 # Start WM
-[ -x dwmblocks ] && setsid -f dwmblocks
-exec dwm
+[ -x /usr/local/bin/dwmblocks ] && /usr/bin/setsid -f /usr/local/bin/dwmblocks
+exec /usr/local/bin/dwm
