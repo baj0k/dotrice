@@ -1,4 +1,4 @@
 #!/bin/sh
 
-game=$(/usr/bin/find "${HOME}/games/flash/" -name "*.swf" -exec /usr/bin/basename {} .swf \; | /usr/local/bin/dmenu -i -p "Select game:") || exit 0
-/usr/bin/flashplayer "${HOME}/games/flash/${game}"
+game=$(find "${HOME}/games/flash/" -name "*.swf" -exec basename {} .swf \; | dmenu -i -p "Select game:") || exit 0
+flashplayer "${HOME}/games/flash/${game}"

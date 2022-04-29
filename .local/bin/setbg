@@ -4,12 +4,12 @@
 wall="${XDG_CACHE_HOME:?}/wall"
 
 # If file, set as wallpaper
-[ -f "$1" ] && /usr/bin/ln -sf "$(/usr/bin/readlink -f "$1" || true)" "${wall}"
+[ -f "$1" ] && ln -sf "$(readlink -f "$1" || true)" "${wall}"
 
 # If directory, choose random file
-[ -d "$1" ] && /usr/bin/ln -sf "$(/usr/bin/find "$(/usr/bin/readlink -f "$1" || true)" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | /usr/bin/shuf -n 1 || true)" "${wall}"
+[ -d "$1" ] && ln -sf "$(find "$(readlink -f "$1" || true)" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1 || true)" "${wall}"
 
 # If no argument, choose random file from wallpapers directory
-[ -z "$1" ] && /usr/bin/ln -sf "$(/usr/bin/find "${HOME}/pictures/wallpaper" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | /usr/bin/shuf -n 1 || true)" "${wall}"
+[ -z "$1" ] && ln -sf "$(find "${HOME}/pictures/wallpaper" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1 || true)" "${wall}"
 
-/usr/bin/xwallpaper --zoom "${wall}"
+xwallpaper --zoom "${wall}"

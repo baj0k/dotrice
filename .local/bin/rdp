@@ -1,7 +1,7 @@
 #!/bin/sh
 # TODO: user should be taken from gpg file
 
-rdp=$(/usr/bin/find "${XDG_DATA_HOME:?}/rdp" -name '*.rdp' -exec /usr/bin/basename {} .rdp \; | /usr/local/bin/dmenu -i -p "Connect to:") || exit 0
-user=$(/usr/local/bin/dmenu -i -p "Enter username:" <&-) || exit 0
-password=$(/usr/bin/pass homelab/rdp/"${user}") || exit 0
-/usr/bin/xfreerdp "${XDG_DATA_HOME:?}/rdp/${rdp}.rdp /p:${password} /u:${user}"
+rdp=$(find "${XDG_DATA_HOME:?}/rdp" -name '*.rdp' -exec basename {} .rdp \; | dmenu -i -p "Connect to:") || exit 0
+user=$(dmenu -i -p "Enter username:" <&-) || exit 0
+password=$(pass homelab/rdp/"${user}") || exit 0
+xfreerdp "${XDG_DATA_HOME:?}/rdp/${rdp}.rdp /p:${password} /u:${user}"

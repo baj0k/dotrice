@@ -1,9 +1,10 @@
+#!/bin/sh
 # Default programs
-export VISUAL="/usr/bin/nvim"
-export EDITOR="/usr/bin/nvim"
-export PAGER="/usr/bin/less"
-export BROWSER="/usr/bin/firefox"
-export TERMINAL="/usr/local/bin/st"
+export VISUAL="nvim"
+export EDITOR="nvim"
+export PAGER="less"
+export BROWSER="firefox"
+export TERMINAL="st"
 
 # XDG compliance
 export XDG_BIN_HOME="${HOME}/.local/bin"

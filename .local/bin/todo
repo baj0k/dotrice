@@ -1,19 +1,19 @@
 #!/bin/sh
 
-TMPFILE=$(/usr/bin/mktemp) && trap '/usr/bin/rm -rf "$TMPFILE"' EXIT
+TMPFILE=$(mktemp) && trap 'rm -rf "$TMPFILE"' EXIT
 TODO="${XDG_DATA_HOME:?}/personal/todo"
 
-[ $# -eq 0 ] && /usr/bin/nl -n ln < "${TODO}" && exit 0
+[ $# -eq 0 ] && nl -n ln < "${TODO}" && exit 0
 
 case "$1" in
 add)
 	shift
 	echo "$@" >> "${TODO}"
-	/usr/bin/nl -n ln < "${TODO}" ;;
+	nl -n ln < "${TODO}" ;;
 rm)
 	shift
-	/usr/bin/sed "$1d" < "${TODO}" > "${TMPFILE}" && /usr/bin/mv "${TMPFILE}" "${TODO}"
-	/usr/bin/nl -n ln < "${TODO}" ;;
+	sed "$1d" < "${TODO}" > "${TMPFILE}" && mv "${TMPFILE}" "${TODO}"
+	nl -n ln < "${TODO}" ;;
 *)
-	printf "Usage: %s add [text] | rm [n]\n" "$(/usr/bin/basename "$0")" ;;
+	printf "Usage: %s add [text] | rm [n]\n" "$(basename "$0")" ;;
 esac

@@ -1,7 +1,7 @@
 #!/bin/sh
 
-screen=$(printf "left\nright" | /usr/local/bin/dmenu -i -p "Select screen:") || exit 0
-resolution=$(/usr/bin/xrandr -q | /usr/bin/grep "\*" | /usr/bin/sed 1q | /usr/bin/cut -d' ' -f4) || exit 0
+screen=$(printf "left\nright" | dmenu -i -p "Select screen:") || exit 0
+resolution=$(xrandr -q | grep "\*" | sed 1q | cut -d' ' -f4) || exit 0
 
 case "${screen}" in
     left) ;;
@@ -9,6 +9,6 @@ case "${screen}" in
     *) exit 0 ;;
 esac
 
-filename="$(/usr/bin/date +%F_%T)"
-/usr/bin/ffmpeg -y -nostats -loglevel 0 -f x11grab -video_size "${resolution}" -i "${offset}" -vframes 1 "/tmp/screenshot-${filename}.png"
-/usr/bin/xclip -selection c -t image/png < "/tmp/screenshot-${filename}.png"
+filename="$(date +%F_%T)"
+ffmpeg -y -nostats -loglevel 0 -f x11grab -video_size "${resolution}" -i "${offset}" -vframes 1 "/tmp/screenshot-${filename}.png"
+xclip -selection c -t image/png < "/tmp/screenshot-${filename}.png"

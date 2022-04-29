@@ -1,4 +1,4 @@
 #!/bin/sh
 
-game=$(/usr/bin/find "${HOME}/games/gba/" -name "*.gba" -exec /usr/bin/basename {} .gba \; | /usr/local/bin/dmenu -i -p "Select game:") || exit 0
+game=$(find "${HOME}/games/gba/" -name "*.gba" -exec basename {} .gba \; | dmenu -i -p "Select game:") || exit 0
 visualboyadvance-m -f "${HOME}/games/gba/${game}"

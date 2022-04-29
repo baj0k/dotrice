@@ -1,4 +1,4 @@
 #!/bin/sh
 
-password=$(/usr/bin/find "${PASSWORD_STORE_DIR:?}" -name '*.gpg' -exec /usr/bin/basename {} .gpg \; | /usr/local/bin/dmenu -i -p "Get password:") || exit 0
-/usr/bin/pass show --clip "${password}"
+password=$(find "${PASSWORD_STORE_DIR:?}" -name '*.gpg' -exec basename {} .gpg \; | dmenu -i -p "Get password:") || exit 0
+pass show --clip "${password}"

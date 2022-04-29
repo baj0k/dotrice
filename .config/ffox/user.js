@@ -107,3 +107,6 @@ user_pref("browser.safebrowsing.downloads.remote.enabled", false);
 
 // Enforce rendering Punycode equivalents
 user_pref("network.IDN_show_punycode", true);
+
+// Enable custom stylesheets
+user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
