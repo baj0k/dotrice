@@ -31,7 +31,6 @@ export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME}/java"
 export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
 export BUNDLE_USER_CONFIG="${XDG_CONFIG_HOME}/bundle"
-export I3BLOCKS_DIR="${XDG_CONFIG_HOME}/i3/i3blocks/blocks"
 export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc"
 export MPD_HOST="${XDG_CONFIG_HOME}/mpd/socket"
 export XINITRC="${XDG_CONFIG_HOME}/xorg/xinitrc"
@@ -42,12 +41,11 @@ export GEM_HOME="${XDG_DATA_HOME}/gem"
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 export TERMINFO="${XDG_DATA_HOME}/terminfo"
 export TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
-export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/pass/password-store"
+export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/pass"
 export WINEPREFIX="${XDG_DATA_HOME}/wine"
 export BUNDLE_USER_PLUGIN="${XDG_DATA_HOME}/bundle"
 export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
-export WORDLISTS="${XDG_DATA_HOME}/wordlists"
 
 # Cache
 export GEM_SPEC_CACHE="${XDG_CACHE_HOME}/gem"
@@ -63,4 +61,4 @@ export GPG_TTY
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
 
 # PATH
-export PATH="${PATH}:${XDG_BIN_HOME}"
+export PATH="${PATH}:${XDG_BIN_HOME}:${XDG_BIN_HOME}/statusbar"

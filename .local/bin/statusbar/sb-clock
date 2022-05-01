@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
+	1) notify-send " " "$(cal --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/" || true)" ;;
+	2) notify-send " " "$(cal -Y --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/" || true)" ;;
+	3) notify-send " " "$(cal -3 --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/" || true)" ;;
+	6) "${TERMINAL:?}" -e "${EDITOR:?}" "$0" ;;
+	*) ;;
+esac
+
+date "+%a, %d %b %H:%M"

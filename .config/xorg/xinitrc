@@ -12,15 +12,8 @@
 [ -x "$(command -v autorandr || true)" ] && autorandr --default &
 [ -x "$(command -v redshift || true)" ] && redshift -P -O 4200 &
 
-# Tray
-#[ -x "$(command -v blueman-applet || true)" ] && /usr/bin/blueman-applet &
-#[ -x "$(command -v caprine || true)" ] && /usr/bin/caprine --minimize &
-#[ -x "$(command -v discord || true)" ] && /usr/bin/discord --start-minimized &
-#[ -x "$(command -v signal-desktop || true)" ] && /usr/bin/signal-desktop --start-in-tray &
-#[ -x "$(command -v spotify || true)" ] && /usr/bin/spotify & # TODO: currently doesn't start in tray
-
 # Autostart
-autostart="dunst firefox mpd spice-vdagent unclutter xcompmgr"
+autostart="dunst mpd unclutter xcompmgr spice-vdagent firefox thunderbird caprine discord signal-desktop spotify"
 for program in ${autostart}; do
     pidof -s "${program}" || [ -x "$(command -v "${program}" || true)" ] && setsid -f "${program}"
 done >/dev/null 2>&1

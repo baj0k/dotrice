@@ -1,0 +1,45 @@
+{
+	"theme": "dark",
+	"privateMode": false,
+	"showPrivateModePrompt": true,
+	"vibrancy": "none",
+	"zoomFactor": 1,
+	"lastWindowState": {
+		"x": 3850,
+		"y": 31,
+		"width": 1260,
+		"height": 689,
+		"isMaximized": false
+	},
+	"menuBarMode": false,
+	"showDockIcon": true,
+	"showTrayIcon": false,
+	"alwaysOnTop": false,
+	"showAlwaysOnTopPrompt": true,
+	"bounceDockOnMessage": false,
+	"showUnreadBadge": false,
+	"showMessageButtons": true,
+	"launchMinimized": false,
+	"flashWindowOnMessage": false,
+	"notificationMessagePreview": true,
+	"block": {
+		"chatSeen": true,
+		"typingIndicator": true,
+		"deliveryReceipt": true
+	},
+	"emojiStyle": "facebook-3-0",
+	"useWorkChat": false,
+	"sidebar": "hidden",
+	"autoHideMenuBar": true,
+	"notificationsMuted": false,
+	"callRingtoneMuted": false,
+	"hardwareAcceleration": true,
+	"quitOnWindowClose": false,
+	"keepMeSignedIn": true,
+	"autoplayVideos": false,
+	"isSpellCheckerEnabled": true,
+	"spellCheckerLanguages": [
+		"pl",
+		"en-US"
+	]
+}
