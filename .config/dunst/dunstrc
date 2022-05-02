@@ -152,7 +152,8 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<b>%s</b>\n%b"
+    #format = "<b>%s</b>\n%b"
+    format = "<b>%s</b>%b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
@@ -388,9 +389,6 @@
 #[fullscreen_show_critical]
 #    msg_urgency = critical
 #    fullscreen = show
-
-[sb-clock]
-    format = "%b"
 
 #[spotify] TODO: fix spotify notifications
 

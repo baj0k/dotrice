@@ -12,6 +12,11 @@
 !.config/locale.conf
 !.config/user-dirs.dirs
 
+# caprine
+!.config/Caprine/
+.config/Caprine/*
+!.config/Caprine/config.json
+
 # dunst
 !.config/dunst/
 
@@ -25,6 +30,11 @@
 
 # i3
 !.config/i3/
+
+# libvirt
+!.config/libvirt/
+.config/libvirt/*
+!.config/libvirt/libvirt.conf
 
 # mpd
 !.config/mpd/
@@ -59,6 +69,14 @@
 
 # ranger
 !.config/ranger/
+
+# systemd
+!.config/systemd/
+.config/systemd/*
+!.config/systemd/user/
+.config/systemd/user/*
+!.config/systemd/user/pacman-aria2dl.timer
+!.config/systemd/user/pacman-aria2dl.service
 
 # tmux
 !.config/tmux/

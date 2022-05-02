@@ -1,0 +1,10 @@
+[Unit]
+Description=Pre-download tarballs of package updates
+Requires=pacman-aria2dl.timer
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/pacman-aria2dl
+
+[Install]
+WantedBy=multi-user.target

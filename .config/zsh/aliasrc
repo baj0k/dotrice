@@ -3,6 +3,7 @@
 alias kop='sudo $(fc -ln -1)'
 alias off='sudo shutdown -h now'
 alias reboot='sudo shutdown -r now'
+alias sys='systemctl --user'
 alias ssys='sudo systemctl'
 alias p='ping 1.1.1.1'
 alias cd..='cd ..'

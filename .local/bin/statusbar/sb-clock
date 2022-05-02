@@ -8,4 +8,4 @@
 	*) ;;
 esac
 
-date "+%a, %d %b %H:%M"
+date "+ %d %b %H:%M"
