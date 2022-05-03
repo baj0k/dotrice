@@ -1,0 +1,12 @@
+#!/bin/sh
+# TODO: test with wlan0 interface
+
+interface=$(ip link | grep -E 'eth0.*UP|wlan0.*UP|tun0.*UP' | cut -d' ' -f2 | tr -d ':'); [ -z "${interface}" ] && echo "No network" && exit 0
+addr=$(ip a show "${interface}" | grep "inet\s" | awk '{print $2}' | cut -d'/' -f1); [ -z "${addr}" ] && echo "In progress" && exit 0
+
+[ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
+    1) printf "%s" "${addr}" | xclip -selection c & notify-send "IP address copied" ;; # left click, copy address
+    *) ;;
+esac
+
+echo "${addr}"

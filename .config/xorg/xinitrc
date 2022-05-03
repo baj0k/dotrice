@@ -13,7 +13,7 @@
 [ -x "$(command -v redshift || true)" ] && redshift -P -O 4200 &
 
 # Autostart
-autostart="dunst mpd unclutter xcompmgr spice-vdagent firefox thunderbird caprine discord signal-desktop spotify"
+autostart="dunst mpd unclutter xcompmgr spice-vdagent firefox caprine discord signal-desktop spotify"
 for program in ${autostart}; do
     pidof -s "${program}" || [ -x "$(command -v "${program}" || true)" ] && setsid -f "${program}"
 done >/dev/null 2>&1
