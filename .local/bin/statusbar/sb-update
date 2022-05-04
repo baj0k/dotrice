@@ -1,13 +1,16 @@
 #!/bin/sh
-# TODO: change behaviour so that the i3bar hides icon after updates were installed
 
-status=$(checkupdates)
-count=$(printf '%s' "${status}" | wc -l)
-
+updates=$(checkupdates)
 [ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
-    1) notify-send "Installing updates..." && yay -Syu --noconfirm > /dev/null 2>&1 && notify-send "Updates installed" ;; # left click, update
-    3) notify-send "${status}" ;; # right click, list updates
-    *)  ;;
+	1) [ -z "${updates}" ] && notify-send "No updates to install" && exit 0
+	   notify-send "Installing updates..."; yay -Syu --noconfirm > /dev/null 2>&1 ;;
+	3) ([ -z "${updates}" ] && notify-send "Everything is up-to date") || notify-send "${updates}" ;;
+	*) notify-send " " "$(printf "%s\n" "Left click   - Update packages"\
+										"Middle click - unused"\
+								 		"Right click  - List updates"\
+								 		"Scroll up    - unused"\
+								 		"Scroll down  - unused"\
+										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || :)" ;;
 esac
-
-[ "${count}" != 0 ] && echo "${count}"
+count=$(printf "%s\n" "${updates}" | wc -l)
+[ -z "${updates}" ] || printf " %s" "${count}"

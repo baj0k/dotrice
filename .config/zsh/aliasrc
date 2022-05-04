@@ -14,7 +14,7 @@ alias psg='ps -ef | grep --color=auto -i $1'
 alias nsg='netstat -natp | grep --color=auto -i $1'
 
 # Package maintenance
-alias syu='yay -Syu'
+alias syu='yay -Syu && kill -35 $(pidof dwmblocks)'
 alias sp='sudo pacman'
 
 # Default parameters 

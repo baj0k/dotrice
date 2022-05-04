@@ -1,12 +1,20 @@
 #!/bin/sh
 # TODO: test with wlan0 interface
+# TODO: test eth0 and tun0 simultaneously
 
 interface=$(ip link | grep -E 'eth0.*UP|wlan0.*UP|tun0.*UP' | cut -d' ' -f2 | tr -d ':'); [ -z "${interface}" ] && echo "No network" && exit 0
 addr=$(ip a show "${interface}" | grep "inet\s" | awk '{print $2}' | cut -d'/' -f1); [ -z "${addr}" ] && echo "In progress" && exit 0
 
 [ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
-    1) printf "%s" "${addr}" | xclip -selection c & notify-send "IP address copied" ;; # left click, copy address
-    *) ;;
+	1) printf "%s" "${addr}" | xclip -selection c & notify-send "IP address copied" ;;
+	2) ;;
+	3) ;;
+	6) "${TERMINAL:?}" -e "${EDITOR:?}" "$0" ;;
+	*) notify-send " " "$(printf "%s\n" "Left click   - copy IP address"\
+										"Middle click - unused"\
+								 		"Right click  - unused"\
+								 		"Scroll up    - unused"\
+								 		"Scroll down  - unused"\
+										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || true)" ;;
 esac
-
 echo "${addr}"

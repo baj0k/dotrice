@@ -12,11 +12,6 @@
 !.config/locale.conf
 !.config/user-dirs.dirs
 
-# caprine
-!.config/Caprine/
-.config/Caprine/*
-!.config/Caprine/config.json
-
 # dunst
 !.config/dunst/
 
