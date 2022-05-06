@@ -24,7 +24,7 @@ In order to use firefox configuration files the ~/.config/ffox/chrome directory 
 # Installation
 Following command installs the dotfiles into your workspace. Do not run this carelessly.
 ```
-curl -L https://raw.githubusercontent.com/baj0k/dotfiles/desktop/setup.sh | sh
+curl -L https://raw.githubusercontent.com/baj0k/dotrice/desktop/setup.sh | sh
 ```
 Or execute following commands manually if changes are needed.
 ```
@@ -53,5 +53,5 @@ Below commands might be useful for managing dotfiles using this approach.
 alias mdot='git --git-dir=$HOME/.local/dotfiles/ --work-tree=$HOME/'
 alias mdotclean='git --git-dir=$HOME/.local/dotfiles/ --work-tree=$HOME/ update-index --assume-unchanged "README.md" ".gitignore" "LICENSE" "setup.sh"'
 mdot config status.showUntrackedFiles no
-mdot remote set-url origin git@github.com:baj0k/dotfiles.git
+mdot remote set-url origin git@github.com:baj0k/dotrice.git
 ```
