@@ -3,8 +3,11 @@
 updates=$(checkupdates)
 [ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
 	1) [ -z "${updates}" ] && notify-send "No updates to install" && exit 0
-	   notify-send "Installing updates..."; yay -Syu --noconfirm > /dev/null 2>&1 ;;
-	3) ([ -z "${updates}" ] && notify-send "Everything is up-to date") || notify-send "${updates}" ;;
+	   notify-send "Installing updates..."; yay -Syu --noconfirm > /dev/null 2>&1
+	   notify-send "Updates installed" && exit 0 ;;
+	3) [ -z "${updates}" ] && notify-send "Everything is up-to date" && exit 0
+	   notify-send "${updates}" ;;
+	6) "${TERMINAL:?}" -e "${EDITOR:?}" "$0" ;;
 	*) notify-send " " "$(printf "%s\n" "Left click   - Update packages"\
 										"Middle click - unused"\
 								 		"Right click  - List updates"\
@@ -12,5 +15,6 @@ updates=$(checkupdates)
 								 		"Scroll down  - unused"\
 										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || :)" ;;
 esac
+
 count=$(printf "%s\n" "${updates}" | wc -l)
-[ -z "${updates}" ] || printf " %s" "${count}"
+[ -z "${updates}" ] || echo " ${count}"

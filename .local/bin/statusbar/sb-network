@@ -1,20 +1,32 @@
 #!/bin/sh
 # TODO: test with wlan0 interface
-# TODO: test eth0 and tun0 simultaneously
 
-interface=$(ip link | grep -E 'eth0.*UP|wlan0.*UP|tun0.*UP' | cut -d' ' -f2 | tr -d ':'); [ -z "${interface}" ] && echo "No network" && exit 0
-addr=$(ip a show "${interface}" | grep "inet\s" | awk '{print $2}' | cut -d'/' -f1); [ -z "${addr}" ] && echo "In progress" && exit 0
+interface=$(ip link | grep -E 'tun0.*UP|wlan0.*UP|eth0.*UP' | cut -d' ' -f2 | tr -d ':' | tail -n 1)
+[ -z "${interface}" ] && echo "No network" && exit 0
+
+addr=$(ip a show "${interface}" | grep "inet\s" | awk '{print $2}' | cut -d'/' -f1)
+[ -z "${addr}" ] && echo "In progress" && exit 0
+
+connection=$(basename "$(pgrep openvpn -a | grep -o "[^/]*\.ovpn" || :)" .ovpn)
 
 [ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
 	1) printf "%s" "${addr}" | xclip -selection c & notify-send "IP address copied" ;;
-	2) ;;
-	3) ;;
+
+	2) OPENVPN_DIR="${XDG_DATA_HOME:?}/openvpn"
+	   [ "${interface}" = "tun0" ] && notify-send "Active VPN connection detected" && exit 0
+       connection=$(find "${OPENVPN_DIR}" -name '*.ovpn' -exec basename {} .ovpn \; | dmenu -i -p "Select connection:") &&
+       notify-send "Connecting to: ${connection}";
+       sudo openvpn --config "${OPENVPN_DIR}/${connection}.ovpn" --daemon 1>/dev/null 2>&1; sleep 1 ;;
+
+	3) [ -z "${connection}" ] && exit 0
+	   sudo killall openvpn; sleep 1; notify-send "VPN disconnected" ;;
+
 	6) "${TERMINAL:?}" -e "${EDITOR:?}" "$0" ;;
 	*) notify-send " " "$(printf "%s\n" "Left click   - copy IP address"\
-										"Middle click - unused"\
-								 		"Right click  - unused"\
+										"Middle click - connect to VPN"\
+								 		"Right click  - disconnect VPN"\
 								 		"Scroll up    - unused"\
 								 		"Scroll down  - unused"\
-										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || true)" ;;
+										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || :)" ;;
 esac
-echo "${addr}"
+echo "${connection:-off}:${addr}"

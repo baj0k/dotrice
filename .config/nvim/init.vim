@@ -72,5 +72,6 @@
     let g:vim_markdown_toml_frontmatter = 1  " for TOML format
     let g:vim_markdown_json_frontmatter = 1  " for JSON format
 
-" Run xrdb after xresources are updated
-    autocmd BufWritePost *xresources !xrdb %
+" Execute commands after editing particular files
+    autocmd BufWritePost $XDG_CONFIG_HOME/xorg/xresources !xrdb %
+    autocmd BufWritePost $HOME/repos/suckless-builds/dwmblocks/blocks.h !cd $HOME/repos/suckless-builds/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }

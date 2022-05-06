@@ -1,15 +1,14 @@
 #!/bin/sh
 
 [ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
-	1) notify-send " " "$(cal --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/" || true)" ;;
-	2) notify-send " " "$(cal -Y --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/" || true)" ;;
-	3) notify-send " " "$(cal -3 --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/" || true)" ;;
+	1) notify-send " " "$(cal --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/" || :)" ;;
+	3) notify-send " " "$(cal -y --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/" || :)" ;;
 	6) "${TERMINAL:?}" -e "${EDITOR:?}" "$0" ;;
 	*) notify-send " " "$(printf "%s\n" "Left click   - show current month"\
-										"Middle click - show following year"\
-								 		"Right click  - show 3 months spanning the date"\
+										"Middle click - usused"\
+								 		"Right click  - show current year"\
 								 		"Scroll up    - unused"\
 								 		"Scroll down  - unused"\
-										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || true)" ;;
+										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || :)" ;;
 esac
-date "+ %d %b %X"
+date "+ %d.%m.%y %X"
