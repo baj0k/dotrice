@@ -9,12 +9,12 @@ updates=$(checkupdates)
 	   notify-send "${updates}" ;;
 	6) "${TERMINAL:?}" -e "${EDITOR:?}" "$0" ;;
 	*) notify-send " " "$(printf "%s\n" "Left click   - Update packages"\
-										"Middle click - unused"\
+										"Middle click - "\
 								 		"Right click  - List updates"\
-								 		"Scroll up    - unused"\
-								 		"Scroll down  - unused"\
+								 		"Scroll up    - "\
+								 		"Scroll down  - "\
 										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || :)" ;;
 esac
 
-count=$(printf "%s\n" "${updates}" | wc -l)
-[ -z "${updates}" ] || echo " ${count}"
+
+[ -z "${updates}" ] || count=$(printf "%s\n" "${updates}" | wc -l) && echo " ${count}"

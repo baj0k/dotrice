@@ -1,11 +1,21 @@
 #!/bin/sh
-# TODO: check if still working after migration to pipewire
 
 [ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
-    1) pactl set-sink-mute "@DEFAULT_SINK@" toggle ;; # left click, toggle mute
-    4) pactl set-sink-volume "@DEFAULT_SINK@" +5% ;; # scroll up, increase
-    5) pactl set-sink-volume "@DEFAULT_SINK@" -5% ;; # scroll down, decrease
-    *) ;;
+    1) pamixer -t ;;
+    2) "${TERMINAL:?}" -e pulsemixer ;;
+    3) pamixer --default-source -t ;;
+    4) pamixer -i 5 ;;
+    5) pamixer -d 5 ;;
+	6) "${TERMINAL}" -e "${EDITOR:?}" "$0" ;;
+	*) notify-send " " "$(printf "%s\n" "Left click   - Toggle speaker"\
+										"Middle click - Launch pulsemixer"\
+								 		"Right click  - Toggle microphone"\
+								 		"Scroll up    - Increase volume by 5%"\
+								 		"Scroll down  - Decrease volume by 5%"\
+										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || :)" ;;
 esac
 
-pamixer --get-volume-human
+if [ "$(pamixer --get-mute || :)" = true ]; then speaker="🔇 OFF"; else speaker="🔊 $(pamixer --get-volume-human || :)"; fi;
+if [ "$(pamixer --default-source --get-mute || :)" = true ]; then mic="🙊"; else mic="🎤"; fi;
+
+echo "${mic} ${speaker}" 

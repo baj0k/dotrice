@@ -1,16 +1,16 @@
 #!/bin/sh
 
 [ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
+    1) notify-send "$(ps axhcS -o pid,%cpu,size,cmd --sort=-size | head | column -t \
+						| awk '{$3=int($3/1024)"M";}{ print;}' | column -t -N 'PID,%CPU,%MEM,CMD' || :)";;
 	2) "${TERMINAL:?}" -e htop ;;
 	3) notify-send "$(df -hP | awk 'NR==1 || /\/home$|\/$|\/var.*$/' || :)" ;;
-    4) notify-send "$(ps axhcS -o pid,%cpu,size,cmd --sort=-size | head | column -t \
-						| awk '{$3=int($3/1024)"M";}{ print;}' | column -t -N 'PID,%CPU,%MEM,CMD' || :)";;
 	6) "${TERMINAL:?}" -e "${EDITOR:?}" "$0" ;;
-	*) notify-send " " "$(printf "%s\n" "Left click   - unused"\
-										"Middle click - open htop"\
-								 		"Right click  - show disk usage"\
-								 		"Scroll up    - show processes by highest memory usage"\
-								 		"Scroll down  - unused"\
+	*) notify-send " " "$(printf "%s\n" "Left click   - Show processes by highest memory usage"\
+										"Middle click - Open htop"\
+								 		"Right click  - Show disk usage"\
+								 		"Scroll up    - "\
+								 		"Scroll down  - "\
 										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || :)" ;;
 esac
 free --mebi | awk 'NR==2{printf (" %.2f / %.1f", ($3/1000), ($2/1000))}'

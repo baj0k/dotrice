@@ -1,3 +1,14 @@
 #!/bin/sh
 
-curl "wttr.in/?format=%c%f+💧%h\n"
+[ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
+	1) notify-send " " "$(curl -sf "wttr.in/?1QTF" || :)" ;;
+	3) notify-send " " "$(curl -sf "wttr.in/?QTF" || :)" ;;
+	6) "${TERMINAL:?}" -e "${EDITOR:?}" "$0" ;;
+	*) notify-send " " "$(printf "%s\n" "Left click   - Show today's forecast"\
+										"Middle click - "\
+								 		"Right click  - Show forecast for three days from today"\
+								 		"Scroll up    - "\
+								 		"Scroll down  - "\
+										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || :)" ;;
+esac
+curl -s "wttr.in/?format=%c+%Z+%f+💧+%h" | sed 's/[ ]\+/\ /g'

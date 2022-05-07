@@ -1,0 +1,29 @@
+#!/bin/sh
+# TODO: add wifi selection via block button interaction and wifi signal strength in output
+
+[ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
+	6) "${TERMINAL:?}" -e "${EDITOR:?}" "$0" ;;
+	*) notify-send " " "$(printf "%s\n" "Left click   - "\
+										"Middle click - "\
+								 		"Right click  - "\
+								 		"Scroll up    - "\
+								 		"Scroll down  - "\
+										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || :)" ;;
+esac
+
+update() {
+    sum=0
+    for arg; do
+        read -r i < "${arg}"
+        sum=$(( sum + i ))
+    done
+    cache=${XDG_CACHE_HOME:?}/${1##*/}
+    [ -f "${cache}" ] && read -r old < "${cache}" || old=0
+    printf %d\\n "${sum}" > "${cache}"
+    printf %d\\n $(( sum - old ))
+}
+
+rx=$(update /sys/class/net/[ew]*/statistics/rx_bytes)
+tx=$(update /sys/class/net/[ew]*/statistics/tx_bytes)
+
+printf " %4sB ⏬ %4sB\\n" "$(numfmt --to=iec "${rx}" || :)" "$(numfmt --to=iec "${tx}" || :)"

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 TMPFILE=$(mktemp) && trap 'rm -rf "$TMPFILE"' EXIT
-TODO="${XDG_DATA_HOME:?}/personal/todo"
+TODO="${XDG_DATA_HOME:?}/todo"
 
 [ $# -eq 0 ] && nl -n ln < "${TODO}" && exit 0
 

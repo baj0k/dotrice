@@ -1,12 +1,17 @@
 #!/bin/sh
-# TODO: try removeing the if statement
 
 [ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
-    1) redshift -O 2500 > /dev/null 2>&1 ;; # left click, enable redshift
-    2) xbacklight 0 ;; # middle click, set 0
-    3) xbacklight 100 && redshift -P -O 5500 > /dev/null 2>&1 ;; # right click, reset
-    4) xbacklight +5 ;; # scroll up, increase
-    5) if [ "$(xbacklight -get)" -lt 6 ];then xbacklight 1;else xbacklight -5;fi ;; # scroll down, decrease
-    *) ;;
+    1) redshift -O 2500 > /dev/null 2>&1 ;;
+    2) xbacklight 0 ;;
+    3) xbacklight 100 && redshift -P -O 5500 > /dev/null 2>&1 ;;
+    4) xbacklight +5 ;;
+    5) if [ "$(xbacklight -get)" -lt 6 ];then xbacklight 1;else xbacklight -5;fi ;;
+	6) "${TERMINAL:?}" -e "${EDITOR:?}" "$0" ;;
+	*) notify-send " " "$(printf "%s\n" "Left click   - Enable redshift"\
+										"Middle click - Set backlight to 0%"\
+								 		"Right click  - Set backlight to 100% and disable redshift"\
+								 		"Scroll up    - Increase backlight by 5%"\
+								 		"Scroll down  - Decrease backlight by 5%"\
+										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || :)" ;;
 esac
 xbacklight -get
