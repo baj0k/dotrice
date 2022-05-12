@@ -1,6 +1,6 @@
 #!/bin/sh
 
-task=$(printf "stream video\nstream audio\ndownload video\ndownload audio" | dmenu -i -p "Youtube:")
+[ -z "${task}" ] && task=$(printf "stream video\nstream audio\ndownload video\ndownload audio" | dmenu -i -p "Youtube:")
 [ -n "${task}" ] && src=$(dmenu -i -p "${task}" <&-)
 
 [ -n "${src}" ] && case "${task}" in

@@ -73,5 +73,4 @@
     let g:vim_markdown_json_frontmatter = 1  " for JSON format
 
 " Execute commands after editing particular files
-    autocmd BufWritePost $XDG_CONFIG_HOME/xorg/xresources !xrdb %
     autocmd BufWritePost $HOME/repos/suckless-builds/dwmblocks/blocks.h !cd $HOME/repos/suckless-builds/dwmblocks/; sudo make install && killall -q dwmblocks && setsid -f dwmblocks &
