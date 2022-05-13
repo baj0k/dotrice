@@ -1,15 +1,15 @@
 #!/bin/sh
 
 [ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
-	1) notify-send "$(todo || :)" ;;
-	2) task=$(dmenu -i -p "Add task:" <&-) && todo add "${task}" ;;
+	1) task=$(dmenu -i -p "Add task:" <&-) && todo add "${task}" ;;
 	3) notify-send "$(todo || :)" && nr=$(dmenu -i -p "Remove task nr:" <&-) && notify-send "$(todo rm "${nr}" || :)" ;;
+	5) notify-send "$(todo || :)" ;;
 	6) "${TERMINAL:?}" -e "${EDITOR:?}" "$0" ;;
-	*) notify-send " " "$(printf "%s\n" "Left click   - Show todo list"\
-										"Middle click - Add task to todo list"\
+	*) notify-send " " "$(printf "%s\n" "Left click   - Add task to todo list"\
+										"Middle click - "\
 								 		"Right click  - Remove task from todo list"\
 								 		"Scroll up    - "\
-								 		"Scroll down  - "\
+								 		"Scroll down  - Show todo list"\
 										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || :)" ;;
 esac
 echo " $(todo | wc -l || :) 📰 $(newsboat -x print-unread | cut -d' ' -f1 || :)"

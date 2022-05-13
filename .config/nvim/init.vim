@@ -3,8 +3,9 @@
 
 " Source vim configuration files
     so $XDG_CONFIG_HOME/nvim/netrw.vim
-    so $XDG_CONFIG_HOME/nvim/vimplug.vim
+    so $XDG_CONFIG_HOME/nvim/pass.vim
     so $XDG_CONFIG_HOME/nvim/tabline.vim
+    so $XDG_CONFIG_HOME/nvim/vimplug.vim
 
 " Basic configuration
 	set encoding=utf-8

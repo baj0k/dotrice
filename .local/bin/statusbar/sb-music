@@ -13,11 +13,12 @@
 								 		"Scroll down  - Previous song"\
 										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || :)" ;;
 esac
-mpc status | grep -q "paused" && paused="⏸️"
-mpc status | grep -q "random: on" && random="🔀"
-mpc status | grep -q "repeat: on" && repeat="🔁"
+
+status=$(mpc status)
+if echo "${status}" | grep -q "paused"; then toggle="⏸️"; else toggle="▶️"; fi
+echo "${status}" | grep -q "random: on" && random="🔀"
+echo "${status}" | grep -q "repeat: on" && repeat="🔁"
+status="${toggle}${random}${repeat}"
 
 current=$(mpc current | sed 's/.*-\ //')
-status="${paused}${random}${repeat}"
-[ -z "${status}" ] && status="🎵"
 [ -n "${current}" ] && echo " ${status} ${current}"

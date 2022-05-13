@@ -53,25 +53,15 @@
 .config/nvim/*
 !.config/nvim/init.vim
 !.config/nvim/netrw.vim
+!.config/nvim/pass.vim
 !.config/nvim/tabline.vim
 !.config/nvim/vimplug.vim
-!.config/nvim/spell
-.config/nvim/spell/*
-!.config/nvim/spell/en.utf-8.add
 
 # newsboat
 !.config/newsboat/
 
 # ranger
 !.config/ranger/
-
-# systemd
-!.config/systemd/
-.config/systemd/*
-!.config/systemd/user/
-.config/systemd/user/*
-!.config/systemd/user/pacman-aria2dl.timer
-!.config/systemd/user/pacman-aria2dl.service
 
 # tmux
 !.config/tmux/

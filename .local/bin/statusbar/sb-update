@@ -5,16 +5,32 @@ updates=$(checkupdates)
 	1) [ -z "${updates}" ] && notify-send "No updates to install" && exit 0
 	   notify-send "Installing updates..."; yay -Syu --noconfirm > /dev/null 2>&1
 	   notify-send "Updates installed" && exit 0 ;;
+	2) sudo rm -f /var/cache/pacman/pkg/* && notify-send "Cache was cleared" ;;
 	3) [ -z "${updates}" ] && notify-send "Everything is up-to date" && exit 0
 	   notify-send "${updates}" ;;
+    5) notify-send "Cache size: $(du -sh /var/cache/pacman/pkg/ | cut -f1 || :)" ;;
 	6) "${TERMINAL:?}" -e "${EDITOR:?}" "$0" ;;
 	*) notify-send " " "$(printf "%s\n" "Left click   - Update packages"\
-										"Middle click - "\
+										"Middle click - Clear pacman cache"\
 								 		"Right click  - List updates"\
 								 		"Scroll up    - "\
-								 		"Scroll down  - "\
+								 		"Scroll down  - Print pacman cache size"\
 										| sed -E 's/(\w* click|Scroll\ \w*)/<b><span color=\"orange\">\1<\/span><\/b>/g' || :)" ;;
 esac
 
+if [ -n "${updates}" ]; then
+	ariadl () { 
+		TMPFILE=$(mktemp) && trap 'rm -f "$TMPFILE"' EXIT
 
-[ -z "${updates}" ] || count=$(printf "%s\n" "${updates}" | wc -l) && echo " ${count}"
+		packages=$(checkupdates | cut -d' ' -f1); [ -z "${packages}" ] && return 0
+		queue=$(echo "${packages}" | pacman -Sp - | grep -v "file:///"); [ -z "${queue}" ] && return 0 
+
+		printf '%s\n' "${queue}" > "${TMPFILE}"
+		sudo aria2c --input-file="${TMPFILE}" --no-conf --dir=/var/cache/pacman/pkg \
+			--max-concurrent-downloads=10 --continue=true --quiet=true --allow-overwrite=true
+	}
+	count=$(printf "%s\n" "${updates}" | wc -l)
+fi
+
+echo " ${count}"
+[ -z "${updates}" ] || { ariadl && notify-send "${count} updates ready to install"; }
