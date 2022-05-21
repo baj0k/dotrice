@@ -1,4 +1,12 @@
 #!/bin/sh
+while true; do
+password=$(find "${PASSWORD_STORE_DIR:?}/" -mindepth 1 -maxdepth 1 ! -path '*/.git*' ! -path '*/.gpg-id' -exec \
+			basename {} .gpg \; | dmenu -i -p "Pass:") || exit 0
 
-password=$(find "${PASSWORD_STORE_DIR:?}" -name '*.gpg' -exec basename {} .gpg \; | dmenu -i -p "Get password:") || exit 0
-pass show --clip "${password}"
+if [ -d "${PASSWORD_STORE_DIR}/${password}" ]; then
+	PASSWORD_STORE_DIR="${PASSWORD_STORE_DIR}/${password}"
+else
+	[ "$1" = "--otp" ] && pass otp --clip "${password}" && otp=$(xclip -o -selection c) && notify-send -t 10000 "${otp}"; exit 0
+	pass --clip "${password}"; exit 0
+fi
+done

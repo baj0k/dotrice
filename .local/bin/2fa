@@ -1,4 +1,0 @@
-#!/bin/sh
-
-password=$(find "${PASSWORD_STORE_DIR:?}" -name '*.gpg' -exec basename {} .gpg \; | dmenu -i -p "Select OTP:") || exit 0
-pass otp --clip "${password}" && otp=$(xclip -o -selection c) && notify-send -t 10000 "${otp}"

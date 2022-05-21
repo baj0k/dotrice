@@ -18,6 +18,7 @@ export XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
 export TMUX_TMPDIR="${XDG_RUNTIME_DIR}"
 
 # Config
+export CRONTAB="${XDG_CONFIG_HOME}/crontab"
 export LESSHISTFILE="-"
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"

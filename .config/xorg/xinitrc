@@ -9,14 +9,11 @@
 [ -x "$(command -v redshift || :)" ] && redshift -P -O 4200 &
 [ -x "$(command -v xwallpaper || :)" ] && xwallpaper --zoom "${XDG_CACHE_HOME:?}/wall" &
 
-# Daemonize cron
-[ -x "$(command -v crond || :)" ] && crond -f "${XDG_CONFIG_HOME:?}/crontab" &
-
 # Daemonize mpc idle to update statusbar on mpd events
 [ -x "$(command -v mpc || :)" ] && while true; do mpc idle && kill -42 "$(pidof dwmblocks || :)";done &
 
 # Autostart
-autostart="dunst mpd unclutter xcompmgr spice-vdagent firefox caprine discord signal-desktop spotify"
+autostart="crond dunst mpd unclutter xcompmgr spice-vdagent firefox caprine discord signal-desktop spotify"
 for program in ${autostart}; do
     pidof -s "${program}" || [ -x "$(command -v "${program}" || true)" ] && setsid -f "${program}"
 done >/dev/null 2>&1

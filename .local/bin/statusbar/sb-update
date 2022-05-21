@@ -30,7 +30,6 @@ if [ -n "${updates}" ]; then
 			--max-concurrent-downloads=10 --continue=true --quiet=true --allow-overwrite=true
 	}
 	count=$(printf "%s\n" "${updates}" | wc -l)
+	ariadl && notify-send "${count} updates ready to install"
 fi
-
 echo " ${count}"
-[ -z "${updates}" ] || { ariadl && notify-send "${count} updates ready to install"; }
