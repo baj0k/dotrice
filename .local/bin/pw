@@ -6,7 +6,7 @@ password=$(find "${PASSWORD_STORE_DIR:?}/" -mindepth 1 -maxdepth 1 ! -path '*/.g
 if [ -d "${PASSWORD_STORE_DIR}/${password}" ]; then
 	PASSWORD_STORE_DIR="${PASSWORD_STORE_DIR}/${password}"
 else
-	[ "$1" = "--otp" ] && pass otp --clip "${password}" && otp=$(xclip -o -selection c) && notify-send -t 10000 "${otp}"; exit 0
+	[ "$1" = "--otp" ] && pass otp --clip "${password}" && otp=$(xclip -o -selection c) && notify-send -t 10000 "${otp}" && exit 0
 	pass --clip "${password}"; exit 0
 fi
 done

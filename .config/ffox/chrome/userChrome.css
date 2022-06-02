@@ -18,18 +18,18 @@
 #userContext-label, #userContext-indicator { display: none !important;}
 
 /* Auto-hide bookmarks bar (show only on nav-bar hover)  */
-#PersonalToolbar{
-    opacity:0 !important;
-    margin-top: -23px !important;
-    transition: all 0.1s ease 0s !important;
-}
-
-#navigator-toolbox:hover > #PersonalToolbar{
-visibility: visible !important;
-margin-top: 0px !important;
-transition: all 0.1s ease 0s !important;
-opacity: 1 !important;
-}
+/*#PersonalToolbar{
+/*    opacity:0 !important;
+/*    margin-top: -23px !important;
+/*    transition: all 0.1s ease 0s !important;
+/*}
+/*
+/*#navigator-toolbox:hover > #PersonalToolbar{
+/*visibility: visible !important;
+/*margin-top: 0px !important;
+/*transition: all 0.1s ease 0s !important;
+/*opacity: 1 !important;
+/*}
 
 /* Hides the buttons on findbar */
 .findbar-highlight {

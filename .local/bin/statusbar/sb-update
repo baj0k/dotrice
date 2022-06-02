@@ -1,6 +1,6 @@
 #!/bin/sh
 
-updates=$(checkupdates)
+[ "${BLOCK_BUTTON}" -ge 5 ] || updates=$(checkupdates)
 [ -n "${BLOCK_BUTTON}" ] && case "${BLOCK_BUTTON}" in
 	1) [ -z "${updates}" ] && notify-send "No updates to install" && exit 0
 	   notify-send "Installing updates..."; yay -Syu --noconfirm > /dev/null 2>&1
@@ -8,7 +8,8 @@ updates=$(checkupdates)
 	2) sudo rm -f /var/cache/pacman/pkg/* && notify-send "Cache was cleared" ;;
 	3) [ -z "${updates}" ] && notify-send "Everything is up-to date" && exit 0
 	   notify-send "${updates}" ;;
-    5) notify-send "Cache size: $(du -sh /var/cache/pacman/pkg/ | cut -f1 || :)" ;;
+    5) if [ -z "$(ls /var/cache/pacman/pkg || :)" ]; then notify-send "Cache empty"
+       else notify-send "Cache size: $(du -sh /var/cache/pacman/pkg/ | cut -f1 || :)"; fi ;;
 	6) "${TERMINAL:?}" -e "${EDITOR:?}" "$0" ;;
 	*) notify-send " " "$(printf "%s\n" "Left click   - Update packages"\
 										"Middle click - Clear pacman cache"\
@@ -19,6 +20,7 @@ updates=$(checkupdates)
 esac
 
 if [ -n "${updates}" ]; then
+	notify-send "Downloading updates"
 	ariadl () { 
 		TMPFILE=$(mktemp) && trap 'rm -f "$TMPFILE"' EXIT
 

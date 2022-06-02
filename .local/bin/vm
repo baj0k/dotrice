@@ -1,0 +1,6 @@
+#!/bin/sh
+
+vm=$(virsh list --all --name | dmenu -i -p "Start VM:") || exit 0
+
+virsh start "${vm}"
+virt-manager --connect qemu:///system --show-domain-console "${vm}"
